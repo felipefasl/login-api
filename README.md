@@ -2,7 +2,7 @@
 
 Backend sistema de login genérico desenvolvido em [NestJs v7](https://nestjs.com/)
 
-[Documentação Swagger](https://nestjs-login-api.herokuapp.com/)
+[Documentação Swagger](https://nestjs-login-api.herokuapp.com/api-docs)
 
 ## MongoDB
 
