@@ -148,7 +148,7 @@ export class UsuarioService {
       throw error;
     }
 
-    return `${variaveisAmbiente.frontend}/redefinicao-senha?hash=${hash._id}`;
+    return `${variaveisAmbiente.frontend}/redefinicao-senha/?hash=${hash._id}`;
   }
 
   async gerarLinkValidacaoEmail(_id: Types.ObjectId) {
@@ -160,7 +160,7 @@ export class UsuarioService {
       throw error;
     }
 
-    return `${variaveisAmbiente.frontend}/validacao-email?hash=${hash._id}`;
+    return `${variaveisAmbiente.frontend}/validacao-email/?hash=${hash._id}`;
   }
 
   async excluirUsuarioPorId(_id: string): Promise<UpdateResponse> {
