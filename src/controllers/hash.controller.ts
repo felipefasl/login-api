@@ -7,7 +7,7 @@ import { ApiOperation, ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagg
 import { Hash } from 'src/schemas/hash.schema';
 import { HashService } from 'src/services/hash.service';
 
-@Controller('hash')
+@Controller('hashs')
 @ApiTags('Hash')
 export class HashController implements Ctrl {
 

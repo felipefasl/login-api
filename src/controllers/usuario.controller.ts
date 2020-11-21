@@ -1,5 +1,5 @@
 import { Acessos } from './../decorators/acessos.decorator';
-import { Body, Controller, Delete, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { Controller as Ctrl } from '@nestjs/common/interfaces';
 import { ApiBearerAuth, ApiOperation, ApiProperty, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -44,7 +44,7 @@ export class UsuarioController implements Ctrl {
         return this.usuarioConsultaService.consultarPorEmail(email);
     }
 
-    @Get('hash-redefinicao-senha')
+    @Get('hash-senha')
     @ApiResponse({ status: 200, type: Usuario, isArray: false })
     @ApiOperation({ summary: 'Consulta Usuário por hash de redefinição de senha', parameters: [{ name: 'hash', in: 'query' }] })
     consultarPorHash(@Query('hash') hash: string, @Query('tipo') tipo: TipoHash): Promise<Usuario[]> {
@@ -53,21 +53,22 @@ export class UsuarioController implements Ctrl {
         return this.usuarioConsultaService.consultarPorHash(hash, tipo);
     }
 
-    @Post('link-redefinicao-senha')
+    @Post('link-senha')
     @ApiOperation({ summary: 'Envia Email com link para redefinição de senha de usuário' })
     solicitarRedefinicaoSenha(@Body() requsiicao: EmailRequisicao): Promise<any> {
 
         return this.usuarioService.enviarEmailLinkRedefinicaoSenha(requsiicao.email);
     }
 
-    @Post('atualizacao-senha-hash')
+    @Put('hash-senha')
     @ApiOperation({ summary: 'Realiza atualização de senha de usuario a partir do hash' })
-    redefinirSenha(@Body() requsiicao: RequisicaoHash): Promise<any> {
+    redefinirSenha(@Body() requisicao: RequisicaoHash): Promise<any> {
 
-        return this.usuarioService.redefinirSenha(requsiicao);
+        console.log(JSON.stringify(requisicao));
+        return this.usuarioService.redefinirSenha(requisicao);
     }
 
-    @Post('validacao-email')
+    @Post('email')
     @ApiOperation({ summary: 'Realiza validação do email cadastrado' })
     validarEmail(@Body() requsiicao: RequisicaoHash): Promise<{ email: string }> {
 
@@ -75,7 +76,7 @@ export class UsuarioController implements Ctrl {
     }
 
 
-    @Post('cadastro')
+    @Post()
     @ApiOperation({ summary: 'Cadastra usuário na base' })
     cadastrar(@Body() usuario: Usuario): Promise<Usuario> {
 
@@ -83,7 +84,7 @@ export class UsuarioController implements Ctrl {
     }
 
 
-    @Post('atualizacao')
+    @Put()
     @ApiOperation({ summary: 'Atualiza usuário na base' })
     atualizar(@Body() usuario: Usuario): Promise<UpdateResponse> {
 

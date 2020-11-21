@@ -28,7 +28,7 @@ export class AuthController implements Ctrl {
     }
 
     @Post('/auth-google')
-    @ApiOperation({ summary: 'Realiza a autenticação no sistema' })
+    @ApiOperation({ summary: 'Realiza a autenticação no sistema via tokenGoogle' })
     @ApiResponse({ status: 200, description: 'Token de autenticação', type: ITokenJwt })
     async loginGoogle(@Body() requisicao: AcessTokenGoogle): Promise<ITokenJwt> {
 
